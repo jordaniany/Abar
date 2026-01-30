@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "../styles/AuthForm.css";
 
-export default function Login() {
+export default function Register() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
@@ -20,10 +20,10 @@ export default function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
     } catch (error) {
       alert("Error: " + error.message);
     }
@@ -31,11 +31,11 @@ export default function Login() {
 
   return (
     <div className="auth-container">
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
+      <h1>Register</h1>
+      <form onSubmit={handleSubmit}>
         <input name="email" type="email" placeholder="Email" onChange={handleChange} />
         <input name="password" type="password" placeholder="Password" onChange={handleChange} />
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );

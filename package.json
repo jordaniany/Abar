@@ -21,6 +21,8 @@
     "vite": "^5.0.0"
   },
   "dependencies": {
+    "firebase": "^12.8.0",
+    "react-firebase-hooks": "^5.1.1",
     "react-router-dom": "^7.13.0"
   }
 }
