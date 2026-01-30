@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Dashboard from "./Dashboard";
+import Dashboard from "../pages/Dashboard";
 
 export default function Login() {
   const [loggedIn, setLoggedIn] = useState(false);
