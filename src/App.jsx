@@ -10,7 +10,7 @@ import Settings from "./pages/Settings";
 import Wells from "./pages/Wells";
 import Maintenance from "./pages/Maintenance";
 import Login from "./components/Login";
-import Register from "./components/Register";
+import Register from "./pages/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
