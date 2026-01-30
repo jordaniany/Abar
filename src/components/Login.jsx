@@ -1,18 +1,23 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./components/Login";
-import Dashboard from "./pages/Dashboard";
-import Home from "./pages/Home";
-import About from "./pages/About";
+import React, { useState } from "react";
+import Dashboard from "../pages/Dashboard"; // ✅ correct path
 
-export default function App() {
+export default function Login() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Simple check: username === "admin"
+    setLoggedIn(true);
+  };
+
+  if (loggedIn) {
+    return <Dashboard />;
+  }
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </Router>
+    <form onSubmit={handleLogin} style={{ padding: "2rem" }}>
+      <input type="text" placeholder="Username" />
+      <button type="submit">Login</button>
+    </form>
   );
 }
