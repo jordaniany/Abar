@@ -1,27 +1,22 @@
 import React, { useState } from "react";
+import Dashboard from "./Dashboard";
 
-export default function Login({ onLogin }) {
-  const [username, setUsername] = useState("");
+export default function Login() {
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    if (username.trim()) {
-      onLogin(username);
-    }
+    setLoggedIn(true);
   };
 
+  if (loggedIn) {
+    return <Dashboard />;
+  }
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <form onSubmit={handleLogin}>
+      <input type="text" placeholder="Username" />
+      <button type="submit">Login</button>
+    </form>
   );
 }
