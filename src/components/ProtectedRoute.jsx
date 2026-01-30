@@ -7,12 +7,12 @@ export default function ProtectedRoute({ children }) {
   const [user, loading] = useAuthState(auth);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Loading...</p>; // أثناء التحقق من حالة المستخدم
   }
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />; // إذا مش مسجل دخول → يرجع لصفحة Login
   }
 
-  return children;
+  return children; // إذا مسجل دخول → يعرض الصفحة المطلوبة
 }

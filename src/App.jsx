@@ -1,29 +1,30 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Login from "./components/Login";
-import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
-import Register from "./pages/Register";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
-import ProtectedRoute from "./components/ProtectedRoute"; // ✅ import ProtectedRoute
+import Wells from "./pages/Wells";
+import Maintenance from "./pages/Maintenance";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
-        {/* Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/contact" element={<Contact />} />
 
-        {/* Protected routes */}
+        {/* صفحات محمية */}
         <Route
           path="/dashboard"
           element={
@@ -48,9 +49,22 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
-        {/* Catch-all route */}
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="/wells"
+          element={
+            <ProtectedRoute>
+              <Wells />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/maintenance"
+          element={
+            <ProtectedRoute>
+              <Maintenance />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );
