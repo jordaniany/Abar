@@ -1,22 +1,18 @@
-import React, { useState } from "react";
-import Dashboard from "../pages/Dashboard";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
+import About from "./pages/About";
 
-export default function Login() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    setLoggedIn(true);
-  };
-
-  if (loggedIn) {
-    return <Dashboard />;
-  }
-
+export default function App() {
   return (
-    <form onSubmit={handleLogin}>
-      <input type="text" placeholder="Username" />
-      <button type="submit">Login</button>
-    </form>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 }
