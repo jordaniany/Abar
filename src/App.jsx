@@ -1,19 +1,18 @@
-import React, { useState } from "react";
-import Login from "./components/Login.jsx";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
+import About from "./pages/About";
 
-function App() {
-  const [user, setUser] = useState(null);
-
-  if (!user) {
-    return <Login onLogin={setUser} />;
-  }
-
+export default function App() {
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Welcome, {user}!</h2>
-      <p>You are now logged in.</p>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
