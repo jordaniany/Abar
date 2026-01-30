@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import "../styles/AuthForm.css";
+import "../styles/AuthForm.css"; // ✅ styled form
 
 export default function Register() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -12,7 +12,7 @@ export default function Register() {
 
   useEffect(() => {
     if (user) {
-      navigate("/dashboard");
+      navigate("/dashboard"); // ✅ redirect if already logged in
     }
   }, [user, navigate]);
 
@@ -23,7 +23,11 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
     } catch (error) {
       alert("Error: " + error.message);
     }
@@ -33,8 +37,18 @@ export default function Register() {
     <div className="auth-container">
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
-        <input name="email" type="email" placeholder="Email" onChange={handleChange} />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          onChange={handleChange}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          onChange={handleChange}
+        />
         <button type="submit">Register</button>
       </form>
     </div>

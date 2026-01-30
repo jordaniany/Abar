@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import "../styles/AuthForm.css";
+import "../styles/AuthForm.css"; // ✅ keep your styled form
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -12,7 +12,7 @@ export default function Login() {
 
   useEffect(() => {
     if (user) {
-      navigate("/dashboard");
+      navigate("/dashboard"); // ✅ redirect if already logged in
     }
   }, [user, navigate]);
 
@@ -33,8 +33,18 @@ export default function Login() {
     <div className="auth-container">
       <h1>Login</h1>
       <form onSubmit={handleLogin}>
-        <input name="email" type="email" placeholder="Email" onChange={handleChange} />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          onChange={handleChange}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          onChange={handleChange}
+        />
         <button type="submit">Login</button>
       </form>
     </div>
