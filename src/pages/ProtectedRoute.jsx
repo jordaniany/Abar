@@ -1,20 +1,17 @@
 // ProtectedRoute.jsx
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../firebase";
+import { getAuth } from "firebase/auth";
 
 export default function ProtectedRoute({ children }) {
-  const [user, loading] = useAuthState(auth);
+  const auth = getAuth();
+  const user = auth.currentUser;
 
-  if (loading) {
-    return <p>⏳ جاري التحقق من بيانات الدخول...</p>;
-  }
-
+  // إذا المستخدم غير مسجل → تحويله إلى صفحة تسجيل الدخول
   if (!user) {
-    alert("🚫 يجب تسجيل الدخول للوصول إلى هذه الصفحة");
     return <Navigate to="/login" replace />;
   }
 
+  // إذا مسجل → عرض الصفحة المطلوبة
   return children;
 }

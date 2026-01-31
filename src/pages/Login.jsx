@@ -1,64 +1,42 @@
 // Login.jsx
-import React, { useState, useEffect } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate, useLocation } from "react-router-dom";
-import "../styles/AuthForm.css"; // ✅ styled form
+import React, { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [user] = useAuthState(auth);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard"); // ✅ redirect if already logged in
-    }
-  }, [user, navigate]);
+  const auth = getAuth();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, formData.email, formData.password);
-      alert("✅ تم تسجيل الدخول بنجاح");
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("تم تسجيل الدخول بنجاح");
     } catch (error) {
-      alert("❌ خطأ: " + error.message);
+      console.error("خطأ أثناء تسجيل الدخول:", error);
     }
   };
 
   return (
-    <div className="auth-container">
-      <h1>تسجيل الدخول</h1>
-
-      {/* ✅ رسالة تنبيه إذا المستخدم وصل من ProtectedRoute */}
-      {location.state?.fromProtected && (
-        <p style={{ color: "red" }}>
-          🚫 الرجاء تسجيل الدخول لمتابعة
-        </p>
-      )}
-
-      <form onSubmit={handleSubmit}>
+    <div className="page-container">
+      <h1>🔑 تسجيل الدخول</h1>
+      <form onSubmit={handleLogin}>
         <input
-          name="email"
           type="email"
-          placeholder="📧 البريد الإلكتروني"
-          onChange={handleChange}
+          placeholder="البريد الإلكتروني"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
         <input
-          name="password"
           type="password"
-          placeholder="🔑 كلمة المرور"
-          onChange={handleChange}
+          placeholder="كلمة المرور"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">🚀 دخول</button>
+        <button type="submit">تسجيل الدخول</button>
       </form>
     </div>
   );
