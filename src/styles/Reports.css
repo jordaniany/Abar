@@ -1,4 +1,10 @@
 /* Reports.css */
+.page-container {
+  padding: 20px;
+  direction: rtl;
+  text-align: right;
+}
+
 .reports-table {
   width: 100%;
   border-collapse: collapse;
@@ -7,16 +13,14 @@
 
 .reports-table th,
 .reports-table td {
-  border: 1px solid #ddd;
-  padding: 12px;
-  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
 }
 
 .reports-table th {
-  background-color: #f5f5f5;
-  font-weight: bold;
+  background-color: #f0f0f0;
 }
 
-.reports-table tr:nth-child(even) {
-  background-color: #fafafa;
+.reports-table td {
+  background-color: #fff;
 }

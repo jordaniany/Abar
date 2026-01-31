@@ -1,34 +1,35 @@
 // Reports.jsx
 import React from "react";
-import "../styles/Reports.css"; // ✅ ملف تنسيق خاص بالتقارير
+import "../styles/Reports.css";
 
 export default function Reports() {
-  // بيانات تجريبية للتقارير
-  const reportsData = [
-    { month: "يناير", wells: 4, maintenance: 3 },
-    { month: "فبراير", wells: 5, maintenance: 2 },
-    { month: "مارس", wells: 6, maintenance: 4 },
+  const reports = [
+    { id: 1, title: "تقرير فني", date: "2026-01-30", status: "مكتمل" },
+    { id: 2, title: "تقرير ميداني", date: "2026-01-28", status: "قيد المراجعة" },
+    { id: 3, title: "تقرير صيانة", date: "2026-01-25", status: "مرفوض" },
   ];
 
   return (
     <div className="page-container">
-      <h1>📑 التقارير</h1>
-      <p>هذه الصفحة تعرض ملخص شهري لعدد الآبار ومهام الصيانة.</p>
+      <h1>📄 التقارير</h1>
+      <p>هذه الصفحة تعرض قائمة بالتقارير الفنية والميدانية.</p>
 
       <table className="reports-table">
         <thead>
           <tr>
-            <th>📅 الشهر</th>
-            <th>🛢️ عدد الآبار</th>
-            <th>🛠️ مهام الصيانة</th>
+            <th>رقم</th>
+            <th>عنوان التقرير</th>
+            <th>التاريخ</th>
+            <th>الحالة</th>
           </tr>
         </thead>
         <tbody>
-          {reportsData.map((report, index) => (
-            <tr key={index}>
-              <td>{report.month}</td>
-              <td>{report.wells}</td>
-              <td>{report.maintenance}</td>
+          {reports.map((report) => (
+            <tr key={report.id}>
+              <td>{report.id}</td>
+              <td>{report.title}</td>
+              <td>{report.date}</td>
+              <td>{report.status}</td>
             </tr>
           ))}
         </tbody>

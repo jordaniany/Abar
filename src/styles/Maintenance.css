@@ -1,4 +1,22 @@
-/* Maintenance.css */
+.page-container {
+  padding: 20px;
+  direction: rtl;
+  text-align: right;
+}
+
+.maintenance-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.maintenance-form input,
+.maintenance-form select,
+.maintenance-form button {
+  padding: 8px;
+  font-size: 14px;
+}
+
 .maintenance-table {
   width: 100%;
   border-collapse: collapse;
@@ -7,16 +25,14 @@
 
 .maintenance-table th,
 .maintenance-table td {
-  border: 1px solid #ddd;
-  padding: 12px;
-  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
 }
 
 .maintenance-table th {
-  background-color: #f5f5f5;
-  font-weight: bold;
+  background-color: #f0f0f0;
 }
 
-.maintenance-table tr:nth-child(even) {
-  background-color: #fafafa;
+.maintenance-table td {
+  background-color: #fff;
 }

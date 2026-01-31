@@ -1,36 +1,35 @@
 // Wells.jsx
 import React from "react";
+import "../styles/Wells.css";
 
 export default function Wells() {
-  // Static wells data (example)
-  const wellsData = [
-    { id: 1, name: "البئر A", status: "نشط", location: "المنطقة الشمالية" },
-    { id: 2, name: "البئر B", status: "صيانة", location: "المنطقة الشرقية" },
-    { id: 3, name: "البئر C", status: "متوقف", location: "المنطقة الجنوبية" },
-    { id: 4, name: "البئر D", status: "نشط", location: "المنطقة الغربية" },
+  const wells = [
+    { id: 1, name: "بئر الشمال", location: "إربد", status: "نشط" },
+    { id: 2, name: "بئر الوسط", location: "عمان", status: "قيد الصيانة" },
+    { id: 3, name: "بئر الجنوب", location: "الكرك", status: "متوقف" },
   ];
 
   return (
     <div className="page-container">
-      <h1>🛢️ قائمة الآبار</h1>
-      <p>هذه الصفحة تعرض بيانات ثابتة عن الآبار.</p>
+      <h1>🛢️ الآبار</h1>
+      <p>هذه الصفحة تعرض قائمة بالآبار وحالتها التشغيلية.</p>
 
-      <table border="1" cellPadding="8">
+      <table className="wells-table">
         <thead>
           <tr>
-            <th>الرقم</th>
-            <th>الاسم</th>
-            <th>الحالة</th>
+            <th>رقم</th>
+            <th>اسم البئر</th>
             <th>الموقع</th>
+            <th>الحالة</th>
           </tr>
         </thead>
         <tbody>
-          {wellsData.map((well) => (
+          {wells.map((well) => (
             <tr key={well.id}>
               <td>{well.id}</td>
               <td>{well.name}</td>
-              <td>{well.status}</td>
               <td>{well.location}</td>
+              <td>{well.status}</td>
             </tr>
           ))}
         </tbody>
