@@ -1,42 +1,24 @@
+// Navbar.jsx
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import "./Navbar.css";
+import { Link } from "react-router-dom";
+import "./Navbar.css"; // optional styling file
 
 export default function Navbar() {
-  const [user] = useAuthState(auth);
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await signOut(auth);
-    navigate("/login");
-  };
-
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/about">About</Link>
-      <Link to="/contact">Contact</Link>
-
-      {!user && (
-        <>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-        </>
-      )}
-
-      {user && (
-        <>
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/profile">Profile</Link>
-          <Link to="/settings">Settings</Link>
-          <Link to="/wells">Wells</Link>
-          <Link to="/maintenance">Maintenance</Link>
-          <button onClick={handleLogout}>Logout</button>
-        </>
-      )}
+    <nav className="navbar">
+      <h2 className="logo">مشروع أبار</h2>
+      <ul className="nav-links">
+        <li><Link to="/">الرئيسية</Link></li>
+        <li><Link to="/about">عن المشروع</Link></li>
+        <li><Link to="/contact">تواصل معنا</Link></li>
+        <li><Link to="/login">تسجيل الدخول</Link></li>
+        <li><Link to="/register">التسجيل</Link></li>
+        <li><Link to="/dashboard">لوحة التحكم</Link></li>
+        <li><Link to="/wells">الآبار</Link></li>
+        <li><Link to="/maintenance">الصيانة</Link></li>
+        <li><Link to="/profile">البروفايل</Link></li>
+        <li><Link to="/settings">الإعدادات</Link></li>
+      </ul>
     </nav>
   );
 }

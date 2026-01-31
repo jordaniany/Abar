@@ -1,2 +1,60 @@
-main {
+/* App.css */
+
+/* إعدادات عامة للتطبيق */
+body {
+  margin: 0;
+  font-family: "Tahoma", "Arial", sans-serif;
+  background-color: #f5f5f5; /* خلفية فاتحة */
+  color: #333; /* لون النص */
+  direction: rtl; /* لأن النصوص بالعربي */
+}
+
+.page-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff; /* خلفية بيضاء للصفحات */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* العناوين */
+h1, h2 {
+  color: #222;
+  margin-bottom: 15px;
+}
+
+/* الجداول */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+table th {
+  background-color: #00bcd4; /* لون مميز للرأس */
+  color: #fff;
+  text-align: center;
+}
+
+table td, table th {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+/* الأزرار */
+button {
+  background-color: #00bcd4;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #0097a7;
 }

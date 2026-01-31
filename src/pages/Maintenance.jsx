@@ -1,32 +1,39 @@
-import React, { useState } from "react";
+// Maintenance.jsx
+import React from "react";
 
 export default function Maintenance() {
-  const [requests, setRequests] = useState([]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newRequest = {
-      well: e.target.well.value,
-      issue: e.target.issue.value,
-      date: new Date().toLocaleDateString()
-    };
-    setRequests([...requests, newRequest]);
-  };
+  // Static maintenance data (example)
+  const maintenanceData = [
+    { id: 1, task: "تبديل المضخة", date: "2026-02-01", status: "قيد التنفيذ" },
+    { id: 2, task: "تنظيف الفلتر", date: "2026-02-05", status: "منجز" },
+    { id: 3, task: "فحص الأنابيب", date: "2026-02-10", status: "مجدول" },
+  ];
 
   return (
     <div className="page-container">
-      <h1>طلبات الصيانة</h1>
-      <form onSubmit={handleSubmit}>
-        <input name="well" placeholder="اسم البئر" />
-        <input name="issue" placeholder="نوع المشكلة" />
-        <button type="submit">إضافة طلب</button>
-      </form>
+      <h1>🛠️ مهام الصيانة</h1>
+      <p>هذه الصفحة تعرض بيانات ثابتة عن مهام الصيانة.</p>
 
-      <ul>
-        {requests.map((req, i) => (
-          <li key={i}>{req.well} - {req.issue} - {req.date}</li>
-        ))}
-      </ul>
+      <table border="1" cellPadding="8">
+        <thead>
+          <tr>
+            <th>الرقم</th>
+            <th>المهمة</th>
+            <th>التاريخ</th>
+            <th>الحالة</th>
+          </tr>
+        </thead>
+        <tbody>
+          {maintenanceData.map((task) => (
+            <tr key={task.id}>
+              <td>{task.id}</td>
+              <td>{task.task}</td>
+              <td>{task.date}</td>
+              <td>{task.status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

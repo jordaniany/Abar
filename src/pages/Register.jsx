@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from "react";
+// Register.jsx
+import React, { useState } from "react";
+import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "../styles/AuthForm.css"; // ✅ styled form
 
 export default function Register() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [user] = useAuthState(auth);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard"); // ✅ redirect if already logged in
-    }
-  }, [user, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,33 +18,46 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(
+      // ✅ إنشاء مستخدم جديد
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
+
+      // ✅ إضافة بيانات المستخدم في Firestore
+      await setDoc(doc(db, "users", userCredential.user.uid), {
+        email: formData.email,
+        role: "user", // افتراضي: مستخدم عادي
+      });
+
+      alert("🎉 مرحباً بك! تم إنشاء الحساب بنجاح");
+      navigate("/dashboard"); // ✅ توجيه تلقائي للـ Dashboard
     } catch (error) {
-      alert("Error: " + error.message);
+      setError("❌ خطأ: " + error.message);
     }
   };
 
   return (
     <div className="auth-container">
-      <h1>Register</h1>
+      <h1>إنشاء حساب جديد</h1>
       <form onSubmit={handleSubmit}>
         <input
           name="email"
           type="email"
-          placeholder="Email"
+          placeholder="📧 البريد الإلكتروني"
           onChange={handleChange}
+          required
         />
         <input
           name="password"
           type="password"
-          placeholder="Password"
+          placeholder="🔑 كلمة المرور"
           onChange={handleChange}
+          required
         />
-        <button type="submit">Register</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <button type="submit">📝 تسجيل</button>
       </form>
     </div>
   );
