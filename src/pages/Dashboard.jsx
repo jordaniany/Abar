@@ -1,15 +1,14 @@
-// Dashboard.jsx
+// src/pages/Dashboard.jsx
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
-import "./Dashboard.css"; // ✅ ملف تنسيق خاص باللوحة
+import "../styles/Dashboard.css"; // ✅ استدعاء صحيح من فولدر styles
 
 export default function Dashboard() {
   const [user] = useAuthState(auth);
 
-  // بيانات ثابتة للتجربة
-  const wellsCount = 4; // عدد الآبار
-  const maintenanceCount = 3; // عدد مهام الصيانة
+  const wellsCount = 4;
+  const maintenanceCount = 3;
 
   return (
     <div className="page-container">

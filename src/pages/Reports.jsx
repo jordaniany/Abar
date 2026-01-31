@@ -1,6 +1,6 @@
 // Reports.jsx
 import React from "react";
-import "./Reports.css"; // ✅ ملف تنسيق خاص بالتقارير
+import "../styles/Reports.css"; // ✅ ملف تنسيق خاص بالتقارير
 
 export default function Reports() {
   // بيانات تجريبية للتقارير
